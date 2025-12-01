@@ -13,24 +13,12 @@ jobs:
 
       - name: Extraire le ZIP
         run: |
-          unzip -o "*.zip" -d extracted || echo "No ZIP found"
+          unzip -o "*.zip" -d extrait
 
-      - name: Copier les fichiers extraits
+      - name: Copier les fichiers extraits à la racine
         run: |
-          cp -r extracted/* .
+          cp -r extrait/* .
 
-      - name: Supprimer le ZIP et les dossiers temporaires
+      - name: Supprimer le dossier extrait
         run: |
-          rm -rf extracted
-          rm -f *.zip
-
-      - name: Commit des fichiers
-        run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          git add .
-          git commit -m "Décompression automatique" || echo "Rien à valider"
-
-      - name: Pousser les modifications
-        run: |
-          git push
+          rm -rf extrait
